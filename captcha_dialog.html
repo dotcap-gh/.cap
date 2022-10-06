@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0cap - Solve CAPTCHA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="captcha_dialog.css">
+</head>
+<body>
+    <dialog id="loadingmodal">
+        <div class="lds-facebook"><div></div><div></div><div></div></div>
+    </dialog>
+    <section class="section">
+        <div class="container has-background-primary p-4">
+            <p>Select the</p>
+            <p class="title" id="subject">***</p>
+        </div>
+        <div class="container p-4" id="images"></div>
+        <p id="status"></p>
+    </section>
+    <script src="captcha_dialog.js"></script>
+</body>
+</html>
