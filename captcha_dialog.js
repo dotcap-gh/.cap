@@ -10,16 +10,15 @@ async function checkAnswer(index, sid) {
     status.classList.add("has-text-success");
     status.textContent = "Correct! Closing soon!";
     opener.postMessage(`0cap_done__${sid}`, "*");
-    setTimeout(close, 1000);
+    setTimeout(close, 500);
   } else {
     status.classList.add("has-text-danger");
     status.textContent = "Incorrect. Please try again.";
-    setTimeout(displayChallenges(), 100);
+    setTimeout(displayChallenges, 100);
   }
 }
 async function displayChallenges() {
   let loadingModal = document.querySelector("#loadingmodal");
-  loadingModal.close();
   loadingModal.showModal();
   let challenge = await fetch("/get_challenge.php", {
     credentials: "include",
@@ -36,9 +35,7 @@ async function displayChallenges() {
     imageElement.classList.add("_image");
     imageElement.classList.add("mr-4");
     imageElement.onclick = async (e) => {
-      loadingModal.showModal();
       await checkAnswer(i, challenge.sid);
-      loadingModal.close();
     };
     imagesArea.append(imageElement);
   });

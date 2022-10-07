@@ -45,3 +45,6 @@
 ._image:active {
   filter: brightness(80%);
 }
+body {
+  overflow-y: hidden;
+}

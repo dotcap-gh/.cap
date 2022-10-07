@@ -5,8 +5,9 @@ header("Content-Type: application/json");
 
 function _get_image()
 {
-  $chunkNum = random_int(0, 36);
-  $dataset = json_decode(file_get_contents("dataset/$chunkNum.json"));
+  $chunks = glob("dataset/*.json");
+  shuffle($chunks);
+  $dataset = json_decode(file_get_contents($chunks[0]));
   shuffle($dataset);
   return $dataset[0];
 }
