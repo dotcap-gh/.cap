@@ -1,10 +1,12 @@
-async function checkAnswer(index, sid) {
+async function checkAnswer(index, sid, loadingModal) {
+  loadingModal.showModal();
   let correct = await fetch(`/check_answer.php?index=${index}`, {
     credentials: "include",
   });
   let status = document.querySelector("#status");
   correct = await correct.json();
   correct = correct.correct;
+  loadingModal.close();
   if (correct) {
     status.classList.remove("has-text-danger");
     status.classList.add("has-text-success");
@@ -35,7 +37,7 @@ async function displayChallenges() {
     imageElement.classList.add("_image");
     imageElement.classList.add("mr-4");
     imageElement.onclick = async (e) => {
-      await checkAnswer(i, challenge.sid);
+      await checkAnswer(i, challenge.sid, loadingModal);
     };
     imagesArea.append(imageElement);
   });
