@@ -1,7 +1,14 @@
 let thisScript = document.currentScript;
-let settings = JSON.parse(thisScript.getAttribute("settings")) || {
+let defaultSettings = {
   classes: [],
 };
+let settings = JSON.parse(thisScript.getAttribute("settings")) || defaultSettings;
+Object.keys(defaultSettings).forEach(e => {
+  if (!(e in settings)) {
+    settings[e] = defaultSettings[e];
+  }
+})
+
 let verifyBtn = document.createElement("button");
 verifyBtn.textContent = "Verify that I'm human";
 verifyBtn.type = "button";
