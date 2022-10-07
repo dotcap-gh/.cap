@@ -9,7 +9,6 @@ Object.keys(defaultSettings).forEach((e) => {
     settings[e] = defaultSettings[e];
   }
 });
-
 let verifyBtn = document.createElement("button");
 verifyBtn.textContent = "Verify that I'm human";
 verifyBtn.type = "button";
