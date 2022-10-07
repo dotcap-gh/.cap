@@ -29,3 +29,4 @@ jobs:
           server: ftpupload.net
           username: ${{ secrets.EPIZY_ACCOUNT_NAME }}
           password: ${{ secrets.EPIZY_ACCOUNT_PASSWORD }}
+          server-dir: ./dotcap.rf.gd/htdocs
