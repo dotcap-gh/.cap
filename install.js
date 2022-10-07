@@ -19,6 +19,8 @@ verifyBtn.onclick = (e) => {
     input.name = "0cap_sid";
     input.value = sid;
     verifyBtn.insertAdjacentElement("afterend", input);
+    verifyBtn.textContent = "Verified";
+    verifyBtn.disabled = true;
   });
   let challengeURLObject = new URL(thisScript.src);
   let challengeURL = `//${challengeURLObject.host}/captcha_dialog.html`;
