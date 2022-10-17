@@ -15,7 +15,7 @@ verifyBtn.type = "button";
 settings.classes.forEach((className) => {
   verifyBtn.classList.add(className);
 });
-verifyBtn.classList.add("0cap");
+verifyBtn.classList.add("dotcap");
 verifyBtn.onclick = (e) => {
   addEventListener("message", (e) => {
     let data = e.data.split("__");
@@ -23,7 +23,7 @@ verifyBtn.onclick = (e) => {
     type = type.slice("0cap_".length);
     let input = document.createElement("input");
     input.type = "hidden";
-    input.name = "0cap_sid";
+    input.name = "dotcap_sid";
     input.value = sid;
     verifyBtn.insertAdjacentElement("afterend", input);
     verifyBtn.textContent = "Verified";
