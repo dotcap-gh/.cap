@@ -3,13 +3,21 @@
 header("Cache-Control: no-store, must-revalidate");
 header("Content-Type: application/json");
 
+$GLOBALS["subjects"] = json_decode(file_get_contents("subjects.json"), $true);
+
 function _get_image()
 {
-  $chunks = glob("dataset/*.json");
-  shuffle($chunks);
-  $dataset = json_decode(file_get_contents($chunks[0]));
-  shuffle($dataset);
-  return $dataset[0];
+  $subjects2 = $GLOBALS["subjects"];
+  shuffle($subjects2);
+  $randomSubject = $subjects2[0];
+  $randomSubjectEncoded = rawurlencode($randomSubject);
+  $results = json_decode(file_get_contents("https://api.pupa.rf.gd/images?query=$randomSubjectEncoded"));
+  $results = $results->results;
+  shuffle($results);
+  return array(
+    $name = $randomSubject,
+    $image = $results[0].url
+  );
 }
 
 function get_images()
@@ -46,7 +54,6 @@ $_SESSION["correct"] = find_correct_index(
 echo json_encode([
   "subject" => [
     "name" => $images["correct"]->name,
-    "friendlyname" => $images["correct"]->friendlyname,
   ],
   "images" => $images["images"],
   "sid" => session_id(),

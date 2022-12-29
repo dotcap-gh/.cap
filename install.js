@@ -31,6 +31,14 @@ verifyBtn.onclick = (e) => {
   });
   let challengeURLObject = new URL(thisScript.src);
   let challengeURL = `//${challengeURLObject.host}/captcha_dialog.html`;
-  open(challengeURL, null, "width=480,height=480");
+  let dialog = document.createElement("dialog");
+  let iframe = document.createElement("iframe");
+  iframe.width = "480px";
+  iframe.height = "480px";
+  iframe.style.border = "none";
+  iframe.src = challengeURL;
+  dialog.appendChild(iframe);
+  thisScript.insertAdjacentElement("afterend", dialog);
+  dialog.showModal();
 };
 thisScript.insertAdjacentElement("afterend", verifyBtn);
