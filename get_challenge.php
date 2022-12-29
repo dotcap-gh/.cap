@@ -16,7 +16,7 @@ function _get_image()
   shuffle($results);
   return array(
     $name = $randomSubject,
-    $image = $results[0].url
+    $image = $results[0]->url
   );
 }
 
