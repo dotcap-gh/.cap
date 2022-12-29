@@ -17,6 +17,7 @@ settings.classes.forEach((className) => {
 });
 verifyBtn.classList.add("dotcap");
 verifyBtn.onclick = (e) => {
+  var dialog = document.createElement("dialog");
   addEventListener("message", (e) => {
     let data = e.data.split("__");
     let [type, sid] = data;
@@ -28,17 +29,20 @@ verifyBtn.onclick = (e) => {
     verifyBtn.insertAdjacentElement("afterend", input);
     verifyBtn.textContent = "Verified";
     verifyBtn.disabled = true;
+    setInterval(() => dialog.remove(), 500)
   });
   let challengeURLObject = new URL(thisScript.src);
   let challengeURL = `//${challengeURLObject.host}/captcha_dialog.html`;
-  let dialog = document.createElement("dialog");
-  let iframe = document.createElement("iframe");
-  iframe.width = "480px";
-  iframe.height = "480px";
-  iframe.style.border = "none";
-  iframe.src = challengeURL;
-  dialog.appendChild(iframe);
-  thisScript.insertAdjacentElement("afterend", dialog);
-  dialog.showModal();
+  if (innerWidth > 480) {
+    let iframe = document.createElement("iframe");
+    iframe.style.width = "480px";
+    iframe.style.height = "480px";
+    iframe.style.border = "none";
+    iframe.src = challengeURL;
+    dialog.appendChild(iframe);
+    thisScript.insertAdjacentElement("afterend", dialog);
+    dialog.showModal();
+  }
+  else open(challengeURL)
 };
 thisScript.insertAdjacentElement("afterend", verifyBtn);

@@ -11,8 +11,8 @@ async function checkAnswer(index, sid, loadingModal) {
     status.classList.remove("has-text-danger");
     status.classList.add("has-text-success");
     status.textContent = "Correct! Closing soon!";
-    parent.postMessage(`0cap_done__${sid}`, "*");
-    setTimeout(close, 500);
+    (opener ?? parent).postMessage(`0cap_done__${sid}`, "*");
+    close();
   } else {
     status.classList.add("has-text-danger");
     status.textContent = "Incorrect. Please try again.";
@@ -39,8 +39,10 @@ async function displayChallenges() {
     imageElement.onclick = async (e) => {
       await checkAnswer(i, challenge.sid, loadingModal);
     };
+    imageElement.onerror = async () => await displayChallenges();
     imagesArea.append(imageElement);
   });
   loadingModal.close();
 }
-displayChallenges();
+(async () => await displayChallenges())();
+document.querySelector("#another").onclick = async () => await displayChallenges();
